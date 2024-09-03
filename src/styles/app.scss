@@ -325,7 +325,7 @@ picture {
           font-size: $f-size-xnormal;
         }
 
-        &.--main{
+        &.--main {
           @include phoneSize {
             display: flex;
           }
@@ -369,8 +369,6 @@ picture {
 
     font-family: $f-main;
 
-    overflow: hidden;
-
     display: flex;
     gap: 1rem;
 
@@ -385,8 +383,6 @@ picture {
         width: 250px;
         margin: 0 auto;
       }
-
-      overflow: hidden;
 
       display: flex;
       align-items: center;
