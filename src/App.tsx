@@ -1,15 +1,24 @@
-import { FaCss3 } from "react-icons/fa";
-import "./app.scss";
+import "./styles/app.scss";
+
+import { Header } from "./components/globals/Header";
+
+import { Hero } from "./components/sections/Hero";
+import { Categories } from "./components/sections/Categories";
+import { Liquors } from "./components/sections/Liquors";
+import { Random } from "./components/sections/Random";
 
 function App() {
   return (
-    <>
-      <header className="header">
-        <h1 className="header__title">
-          Project initialization <FaCss3 />
-        </h1>
-      </header>
-    </>
+    <div id="container-all" className="container-all">
+      <Header />
+
+      <main id="main" className="main">
+        <Hero />
+        <Random />
+        <Categories />
+        <Liquors />
+      </main>
+    </div>
   );
 }
 

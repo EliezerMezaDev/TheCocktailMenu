@@ -1,0 +1,31 @@
+//? ---- resposive layout functions
+@mixin responsiveSize($width) {
+  @media only screen and (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin screenSize() {
+  @media only screen and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin tabletSize() {
+  @media only screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin phoneSize() {
+  @media only screen and (max-width: 425px) {
+    @content;
+  }
+}
+
+//? ---- GENERALS
+@function random_range($min, $max) {
+  $randon: random();
+  $random_range: $min + floor($randon * (($max - $min) + 1));
+  @return $random_range;
+}
