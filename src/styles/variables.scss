@@ -1,0 +1,58 @@
+@font-face {
+  font-family: "NotoSans";
+  src: local("NotoSans"),
+    url("../assets/fonts/NotoSans/NotoSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "NeonRetro";
+  src: local("NeonRetro"),
+    url("../assets/fonts/NeonRetro/NeonRetro-Regular.otf") format("opentype");
+}
+
+//? ---- COLORS ----
+$c-main-dark: #250507ff;
+$c-main: #891e25ff;
+$c-main-alt: #ba312cff;
+$c-dist: #f6a91a;
+$c-white: #f5f5f5ff;
+$c-black: #1d000dff;
+
+//? ---- FONTS ----
+$f-title: "NeonRetro";
+$f-main: "NotoSans";
+
+//? ---- SIZES ----
+$f-size-h1: 2.25rem;
+$f-size-h2: 1.5rem;
+$f-size-h3: 1.25rem;
+
+$f-size-xxxbig: 6rem;
+$f-size-xxbig: 5rem;
+$f-size-xbig: 4rem;
+$f-size-big: 3rem;
+$f-size-xlarge: 2.5rem;
+$f-size-large: 2rem;
+$f-size-xnormal: 1.25rem;
+$f-size-normal: 1rem;
+$f-size-small: 0.75rem;
+
+$f-weight-400: 400;
+$f-weight-500: 500;
+$f-weight-600: 600;
+
+$m-botton-0-25: 0.25rem;
+$m-botton-0-5: 0.5rem;
+$m-botton-0-75: 0.75rem;
+$m-botton-1: 1rem;
+$m-botton-1-5: 1.5rem;
+$m-botton-2: 2rem;
+$m-botton-2-5: 2.5rem;
+$m-botton-3: 3rem;
+
+$z-index-tootip: 10;
+$z-index-fixed: 100;
+$z-index-modal: 1000;
+
+//? ---- CONST ----
+$container-maxwidth: 1280px;

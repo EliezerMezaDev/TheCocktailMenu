@@ -1,0 +1,315 @@
+@import "variables.scss";
+@import "functions.scss";
+
+//? ---- RESET ---- ?//
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+ol,
+ul,
+li {
+  list-style: none;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+picture {
+  display: flex;
+
+  img {
+    max-width: 100%;
+  }
+}
+
+#container-all {
+  position: relative;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: $c-main-dark;
+
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+//? ---- LAYOUT ---- ?//
+.container {
+  width: $container-maxwidth;
+  max-width: $container-maxwidth;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  place-self: center;
+}
+
+.bordered {
+  border-radius: 2rem;
+  border: 1px solid darken($c-dist, 40%);
+  box-shadow: 0px 0px 10px -1px darken($c-dist, 40%);
+}
+
+//? ---- GENERAL ---- ?//
+.header {
+  position: absolute;
+
+  width: 100%;
+
+  padding: 0.5rem;
+
+  color: $c-white;
+
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__wrapper {
+    justify-content: center;
+  }
+
+  .navbar {
+    &__wrapper {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    &__item {
+      padding: 0.25rem 0.5rem;
+      color: $c-dist;
+      font-size: $f-size-normal;
+
+      border-radius: 2rem;
+      border: 2px solid transparent;
+
+      transition: 0.3s;
+
+      &:hover,
+      &:focus {
+        border-color: transparentize($c-dist, 0.8);
+        background-color: transparentize($c-dist, 0.7);
+      }
+    }
+  }
+}
+
+.hero {
+  height: 100vh;
+  width: 100%;
+
+  &__wrapper {
+    position: relative;
+    width: 100vw;
+    height: 100%;
+
+    background-image: url("https://images.unsplash.com/photo-1514361892635-6b07e31e75f9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    z-index: 1;
+
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+
+    &::before {
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        45deg,
+        transparentize($c-black, 0.1),
+        transparentize($c-main-dark, 0.5)
+      );
+
+      z-index: 2;
+    }
+  }
+
+  &__data {
+    position: relative;
+
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
+
+    overflow: hidden;
+
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &__title {
+      font-size: $f-size-xxxbig;
+      font-family: $f-title;
+
+      @include responsiveSize(555px) {
+        font-size: $f-size-xbig;
+      }
+
+      @include phoneSize {
+        font-size: $f-size-big;
+      }
+
+      color: lighten(#f6981aff, 50%);
+      text-shadow: 0 0 20px $c-dist, 0 0 30px $c-dist, 0 0 40px $c-dist,
+        0 0 70px $c-dist, 0 0 80px $c-dist, 0 0 100px $c-dist, 0 0 150px $c-dist;
+
+      .neon {
+        will-change: opacity;
+
+        &.blinker {
+          animation: blinker linear infinite;
+
+          &.blinker_1 {
+            animation-duration: random_range(1s, 11s);
+          }
+
+          &.blinker_2 {
+            animation-duration: random_range(2s, 8s);
+          }
+        }
+
+        &.flicker {
+          animation: flicker linear infinite random_range(0.5s, 2s);
+        }
+      }
+
+      @keyframes blinker {
+        70% {
+          opacity: 1;
+        }
+        79% {
+          opacity: 0;
+        }
+        81% {
+          opacity: 1;
+        }
+        82% {
+          opacity: 0;
+        }
+        83% {
+          opacity: 1;
+        }
+        92% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes flicker {
+        20% {
+          opacity: 1;
+        }
+        80% {
+          opacity: 0.8;
+        }
+      }
+    }
+
+    &__desc {
+      width: min(500px, calc(100% - 2rem));
+      font-family: $f-main;
+      color: $c-white;
+
+      margin-bottom: 0.5rem;
+      text-align: center;
+
+      p {
+        font-size: $f-size-xnormal;
+
+        @include phoneSize {
+          font-size: $f-size-normal;
+        }
+
+        &.main {
+          color: $c-dist;
+        }
+      }
+    }
+
+    .actions {
+      padding-top: 1.5rem;
+      display: flex;
+      gap: 0.25rem;
+
+      &__btn {
+        padding: 0.75rem 1.25rem;
+        margin-top: 0.5rem;
+
+        border-radius: 2rem;
+        border: 2px solid transparentize($c-main-dark, 0.9);
+
+        background-color: transparentize($c-main-dark, 0.5);
+
+        font-size: $f-size-normal;
+        color: $c-white;
+
+        transition: 0.3s;
+
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        &:hover {
+          background-color: transparentize($c-main-dark, 0.15);
+        }
+
+        @include phoneSize {
+          display: none;
+        }
+
+        &.main {
+          background-color: transparentize($c-dist, 0.5);
+
+          @include phoneSize {
+            display: flex;
+          }
+
+          &:hover {
+            background-color: transparentize($c-dist, 0.15);
+          }
+        }
+
+        .icon {
+          font-size: $f-size-xnormal;
+        }
+      }
+    }
+  }
+}
+
+.liquors {
+  width: 100vw;
+  height: 100vh;
+}
