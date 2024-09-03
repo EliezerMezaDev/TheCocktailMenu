@@ -7,11 +7,10 @@ export const Categories = () => {
   useEffect(() => {
     const fetchData = async () => {
       axios.get(endpoints.getAllCategories).then((resp) => {
-        console.log(`<>>> resp <>>>`, resp);
       });
     };
 
-    fetchData();
+    // fetchData();
   }, []);
 
   return <section className="categories">asd</section>;

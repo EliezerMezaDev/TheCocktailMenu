@@ -2,12 +2,14 @@ import { Link } from "../interfaces";
 
 export const endpoints = {
   getAllCategories:
-    "http://www.thecocktaildb.com/api/json/v1/1/list.php?c=list",
-  getAllGlasses: "http://www.thecocktaildb.com/api/json/v1/1/list.php?g=list",
+    "https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list",
+  getAllGlasses: "https://www.thecocktaildb.com/api/json/v1/1/list.php?g=list",
   getAllIngredients:
-    "http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list",
+    "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list",
   getAllAlcholicFilters:
-    "http://www.thecocktaildb.com/api/json/v1/1/list.php?a=list",
+    "https://www.thecocktaildb.com/api/json/v1/1/list.php?a=list",
+
+  getRandomCocktail: "https://www.thecocktaildb.com/api/json/v1/1/random.php",
 };
 
 export const NAV_ITEMS: Link[] = [
