@@ -22,17 +22,12 @@ export const NAV_ITEMS: Link[] = [
     label: "Inicio",
   },
   {
-    url: "#categories",
-    title: "categories",
-    label: "Categorias",
+    url: "#cocktails",
+    title: "cocktails",
+    label: "Cocteles",
   },
   {
-    url: "#ingredients",
-    title: "ingredients",
-    label: "Ingredientes",
-  },
-  {
-    url: "#about",
+    url: "https://github.com/EliezerMezaDev/TheCocktailMenu",
     title: "about",
     label: "Acerca de",
   },
