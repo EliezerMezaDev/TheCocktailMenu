@@ -19,6 +19,10 @@ li {
   list-style: none;
 }
 
+a {
+  text-decoration: none;
+}
+
 button {
   background-color: transparent;
   border: none;
@@ -39,7 +43,9 @@ picture {
   width: 100vw;
   height: 100vh;
 
-  background-color: $c-main-dark;
+  background-color: $c-black;
+
+  scroll-behavior: smooth;
 
   overflow: hidden;
   overflow-y: scroll;
@@ -58,6 +64,15 @@ picture {
   overflow: hidden;
 }
 
+.section {
+  min-height: 100vh;
+
+  @include phoneSize {
+    width: calc(100% - 2rem);
+    margin: 0 auto;
+  }
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -68,6 +83,23 @@ picture {
   border-radius: 2rem;
   border: 1px solid darken($c-dist, 40%);
   box-shadow: 0px 0px 10px -1px darken($c-dist, 40%);
+}
+
+.inputWrapper {
+  padding: 0.25rem 0.5rem;
+
+  .input {
+    border: none;
+    background-color: transparent;
+
+    color: $c-white;
+
+    font-family: $f-main;
+
+    option {
+      color: $c-black;
+    }
+  }
 }
 
 .button {
@@ -165,6 +197,132 @@ picture {
     }
     80% {
       opacity: 0.8;
+    }
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+
+  &__bubble {
+    width: 0.75rem;
+    height: 0.75rem;
+    margin: 2rem 0.3rem;
+    background: $c-dist;
+    border-radius: 50%;
+    animation: 0.9s bounce infinite alternate;
+
+    &:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes bounce {
+      to {
+        opacity: 0.5;
+        transform: translate3d(0, -1rem, 0);
+      }
+    }
+  }
+}
+
+.notFound {
+  color: $c-dist;
+
+  font-family: $f-main;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__iconWrapper {
+    padding: 0.25rem;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+
+    .notFound__icon {
+      font-size: $f-size-xxbig;
+    }
+  }
+
+  &__title {
+    font-size: $f-size-xlarge;
+  }
+
+  &__message {
+    text-align: center;
+  }
+}
+
+.filters {
+  margin-bottom: 3rem;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  @include screenSize {
+    justify-content: center;
+    width: calc(100% - 2rem);
+  }
+
+  .filter {
+    height: 28px;
+    padding: 0 0 0 0.5rem;
+    border: 2px solid transparentize($c-main-dark, 0.9);
+    border-radius: 2rem;
+    background-color: $c-main-alt;
+
+    font-size: $f-size-small;
+    font-family: $f-main;
+    color: $c-white;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .input {
+      font-size: $f-size-small;
+    }
+
+    &.button {
+      margin: 0;
+      padding: 0 1rem;
+
+      background-color: $c-main;
+
+      color: $c-white;
+
+      transition: 0.3s;
+
+      &:hover {
+        background-color: $c-main-alt;
+      }
+
+      button {
+        color: $c-white;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+    }
+
+    .inputWrapper {
+      padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+      background-color: $c-main;
+
+      &:focus-within {
+        background-color: $c-main-alt;
+      }
     }
   }
 }
@@ -290,6 +448,7 @@ picture {
       width: min(500px, calc(100% - 2rem));
       font-family: $f-main;
       color: $c-white;
+      font-weight: 900;
 
       margin-bottom: 0.5rem;
       text-align: center;
@@ -303,6 +462,7 @@ picture {
 
         &.main {
           color: $c-dist;
+          font-size: $f-size-xnormal;
 
           @include phoneSize {
             display: flex;
@@ -351,6 +511,8 @@ picture {
     font-size: $f-size-big;
     text-align: center;
 
+    cursor: pointer;
+
     @include phoneSize {
       font-size: $f-size-xlarge;
     }
@@ -362,12 +524,21 @@ picture {
 
   .cocktail {
     width: min(700px, calc(100% - 2rem));
+    padding: 0.5rem;
 
     @include tabletSize {
       padding: 0 0.5rem;
     }
 
+    border-radius: 0.5rem;
+    background-color: transparentize($c-main, 0.5);
+    border: 1px solid transparentize($c-main, 0.25);
+
     font-family: $f-main;
+
+    cursor: pointer;
+
+    transition: 0.3s;
 
     display: flex;
     gap: 1rem;
@@ -376,13 +547,29 @@ picture {
       flex-direction: column-reverse;
     }
 
+    &:hover {
+      background-color: transparentize($c-main, 0.55);
+
+      .cocktail__image img {
+        filter: blur(2px);
+        transform: scale(1.1);
+      }
+    }
+
     &__image {
+      position: relative;
+      min-width: 250px;
       width: 350px;
+      border: 0.5rem;
 
       @include tabletSize {
         width: 250px;
         margin: 0 auto;
       }
+
+      overflow: hidden;
+
+      z-index: 1;
 
       display: flex;
       align-items: center;
@@ -390,24 +577,26 @@ picture {
       flex-direction: column;
 
       img {
-        position: relative;
         width: 100%;
         max-width: 100%;
 
-        border-radius: 0.25rem;
+        border-radius: 0.5rem;
 
         z-index: 1;
 
-        filter: blur(2px);
+        filter: blur(0);
         transition: 0.3s ease-in-out;
-
-        @include tabletSize {
-          filter: blur(0px);
-        }
       }
 
       p {
-        color: transparentize($c-white, 0.75);
+        position: absolute;
+        bottom: 0.35rem;
+        left: 0.35rem;
+
+        font-size: $f-size-small;
+        color: transparentize($c-white, 0.5);
+
+        z-index: 2;
       }
     }
 
@@ -454,11 +643,149 @@ picture {
         font-size: $f-size-small;
       }
     }
+  }
+}
 
-    &:hover {
-      .cocktail__image img {
-        -webkit-filter: blur(0);
-        filter: blur(0);
+.cocktails {
+  padding: 3rem 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  &__title {
+    font-size: $f-size-big;
+    text-align: center;
+    margin-bottom: 0.5rem;
+
+    @include phoneSize {
+      font-size: $f-size-xlarge;
+    }
+  }
+
+  &__wrapper {
+    width: 1024px;
+    padding: 0 1rem;
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+
+    @include screenSize {
+      width: 700px;
+
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @include tabletSize {
+      width: calc(100% - 2rem);
+
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include phoneSize {
+      grid-template-columns: repeat(2, 2fr);
+    }
+
+    .cocktail {
+      width: 100%;
+      padding: 0.5rem 0.5rem 0 0.5rem;
+
+      @include phoneSize {
+        padding: 0.25rem 0.25rem 0 0.25rem;
+      }
+
+      border-radius: 0.5rem;
+      background-color: transparentize($c-main, 0.5);
+      border: 1px solid transparentize($c-main, 0.25);
+
+      cursor: pointer;
+
+      transition: 0.3s;
+
+      overflow: hidden;
+
+      &:hover {
+        background-color: transparentize($c-main, 0.55);
+
+        .cocktail__image {
+          img {
+            filter: blur(2px);
+            transform: scale(1.1);
+          }
+        }
+      }
+
+      &__image {
+        position: relative;
+
+        border-radius: 0.5rem;
+
+        overflow: hidden;
+
+        display: flex;
+        flex-direction: column;
+
+        img {
+          border-radius: 0.5rem;
+          filter: blur(0px);
+
+          transition: 0.3s ease-in-out;
+        }
+
+        p {
+          position: absolute;
+          bottom: 0.35rem;
+          left: 0.35rem;
+
+          font-size: $f-size-small;
+          color: transparentize($c-white, 0.5);
+        }
+      }
+
+      &__data {
+        padding: 0.25rem 0.5rem;
+
+        @include phoneSize {
+          padding: 0.25rem 0;
+        }
+
+        font-family: $f-main;
+
+        display: flex;
+        align-items: center;
+      }
+
+      &__title {
+        color: $c-dist;
+        font-size: $f-size-small;
+        line-height: 1.25rem;
+      }
+
+      &__ingredients {
+        margin: 0.25rem 0 0.75rem 0;
+        display: flex;
+        gap: 0.25rem;
+
+        .ingredient {
+          padding: 0.15rem 0.5rem;
+          border-radius: 1rem;
+
+          border: 1px solid $c-main-alt;
+          background-color: transparentize($c-main, 0.5);
+
+          font-size: $f-size-small;
+          color: $c-white;
+
+          cursor: pointer;
+
+          transition: 0.3s;
+
+          &:hover {
+            background-color: $c-main;
+          }
+        }
       }
     }
   }

@@ -9,6 +9,9 @@ export const endpoints = {
   getAllAlcholicFilters:
     "https://www.thecocktaildb.com/api/json/v1/1/list.php?a=list",
 
+  getCocktailsByFilter:
+    "https://www.thecocktaildb.com/api/json/v1/1/filter.php?",
+
   getRandomCocktail: "https://www.thecocktaildb.com/api/json/v1/1/random.php",
 };
 

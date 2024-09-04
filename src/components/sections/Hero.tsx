@@ -5,7 +5,7 @@ import { LiaCocktailSolid } from "react-icons/lia";
 
 export const Hero = () => {
   return (
-    <section className="hero">
+    <section id="home" className="hero">
       <div className="hero__wrapper">
         <article className="hero__data">
           <p className="hero__data__title neon-title">
@@ -27,10 +27,15 @@ export const Hero = () => {
           </span>
 
           <span className="actions">
-            <button className="actions__btn button">Explorar</button>
-            <button className="actions__btn button --main">
-              Buscar un coctel <LiaCocktailSolid className="icon" />
-            </button>
+            <a href="#random">
+              <button className="actions__btn button">Explorar</button>
+            </a>
+
+            <a href="#categories">
+              <button className="actions__btn button --main">
+                Buscar un coctel <LiaCocktailSolid className="icon" />
+              </button>
+            </a>
           </span>
         </article>
       </div>
