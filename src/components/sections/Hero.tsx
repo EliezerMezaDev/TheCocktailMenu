@@ -31,7 +31,7 @@ export const Hero = () => {
               <button className="actions__btn button">Explorar</button>
             </a>
 
-            <a href="#categories">
+            <a href="#cocktails">
               <button className="actions__btn button --main">
                 Buscar un coctel <LiaCocktailSolid className="icon" />
               </button>
