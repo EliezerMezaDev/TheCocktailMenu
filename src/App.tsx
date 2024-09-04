@@ -3,9 +3,8 @@ import "./styles/app.scss";
 import { Header } from "./components/globals/Header";
 
 import { Hero } from "./components/sections/Hero";
-import { Categories } from "./components/sections/Categories";
-import { Liquors } from "./components/sections/Liquors";
 import { Random } from "./components/sections/Random";
+import { Cocktails } from "./components/sections/Cocktails";
 
 function App() {
   return (
@@ -15,8 +14,7 @@ function App() {
       <main id="main" className="main">
         <Hero />
         <Random />
-        <Categories />
-        <Liquors />
+        <Cocktails />
       </main>
     </div>
   );

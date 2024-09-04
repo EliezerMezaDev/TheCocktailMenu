@@ -9,6 +9,9 @@ export const endpoints = {
   getAllAlcholicFilters:
     "https://www.thecocktaildb.com/api/json/v1/1/list.php?a=list",
 
+  getCocktailsByFilter:
+    "https://www.thecocktaildb.com/api/json/v1/1/filter.php?",
+
   getRandomCocktail: "https://www.thecocktaildb.com/api/json/v1/1/random.php",
 };
 
@@ -19,17 +22,12 @@ export const NAV_ITEMS: Link[] = [
     label: "Inicio",
   },
   {
-    url: "#categories",
-    title: "categories",
-    label: "Categorias",
+    url: "#cocktails",
+    title: "cocktails",
+    label: "Cocteles",
   },
   {
-    url: "#ingredients",
-    title: "ingredients",
-    label: "Ingredientes",
-  },
-  {
-    url: "#about",
+    url: "https://github.com/EliezerMezaDev/TheCocktailMenu",
     title: "about",
     label: "Acerca de",
   },

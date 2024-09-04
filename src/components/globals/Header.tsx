@@ -15,7 +15,10 @@ export const Header = () => {
               NAV_ITEMS.map((item: Link, index: number) => {
                 return (
                   <li key={index} title={item.title}>
+                    <a href={item.url}>
+
                     <button className="navbar__item">{item.label}</button>
+                    </a>
                   </li>
                 );
               })}
