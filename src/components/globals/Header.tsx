@@ -1,4 +1,4 @@
-import { HashLink } from "react-router-hash-link";
+import { NavLink } from "react-router-dom";
 
 export const Header = () => {
   return (
@@ -7,15 +7,15 @@ export const Header = () => {
         <nav className="navbar">
           <ul className="navbar__wrapper">
             <li>
-              <HashLink to={`/#home`} title={"nav_home"}>
+              <NavLink to={`./home`} title={"nav_home"}>
                 <button className="navbar__item">Inicio</button>
-              </HashLink>
+              </NavLink>
             </li>
 
             <li title={"nav_cocktails"}>
-              <HashLink to={`/#cocktails`}>
+              <NavLink to={`./search`}>
                 <button className="navbar__item">Cocteles</button>
-              </HashLink>
+              </NavLink>
             </li>
 
             <li title={"nav_github"}>
