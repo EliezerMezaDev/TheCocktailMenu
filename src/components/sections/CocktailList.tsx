@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Navigate, NavLink, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 //? components
@@ -10,9 +11,11 @@ import { FaSearch } from "react-icons/fa";
 
 //? others
 import { endpoints } from "../../assets/data";
-import { NavLink } from "react-router-dom";
 
-export const Cocktails = () => {
+export const CocktailList = () => {
+  const navigate = useNavigate();
+  const { term } = useParams();
+
   const [inSearch, setInSearch] = useState<boolean>(false);
   const [searched, setSearched] = useState<boolean>(false);
 
@@ -20,7 +23,7 @@ export const Cocktails = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [glasses, setGlasses] = useState<string[]>([]);
 
-  const [currentIngredient, setCurrentIngredient] = useState<string>("Vodka");
+  const [currentIngredient, setCurrentIngredient] = useState<string>("");
   const [currentCategory, setCurrentCategory] = useState<string>("");
   const [currentGlass, setCurrentGlass] = useState<string>("");
 
@@ -38,18 +41,19 @@ export const Cocktails = () => {
           const [respAllCategories, respAllGlasses, respAllIngredients] = resp;
 
           setCategories(
-            respAllCategories.data.drinks.map(
-              (c: { strCategory: string }) => c.strCategory
+            respAllCategories.data.drinks.map((c: { strCategory: string }) =>
+              String(c.strCategory).replace("/", "-")
             )
           );
           setGlasses(
-            respAllGlasses.data.drinks.map(
-              (g: { strGlass: string }) => g.strGlass
+            respAllGlasses.data.drinks.map((g: { strGlass: string }) =>
+              String(g.strGlass).replace("/", "-")
             )
           );
           setIngredients(
             respAllIngredients.data.drinks.map(
-              (i: { strIngredient1: string }) => i.strIngredient1
+              (i: { strIngredient1: string }) =>
+                String(i.strIngredient1).replace("/", "-")
             )
           );
         })
@@ -57,56 +61,65 @@ export const Cocktails = () => {
   }
 
   function getCocktailByFilter() {
+    if (!term) return;
+
     setCocktails([]);
     setInSearch(true);
 
     let url = endpoints.getCocktailsByFilter;
 
-    if (currentIngredient !== "") url = `${url}i=${currentIngredient}`;
-    if (currentCategory !== "") url = `${url}c=${currentCategory}`;
-    if (currentGlass !== "") url = `${url}g=${currentGlass}`;
+    return axios
+      .get(`${url}${term}`)
+      .then((resp: { data: { drinks: any[] } }) => {
+        setSearched(true);
+        setInSearch(false);
 
-    return axios.get(url).then((resp: { data: { drinks: any[] } }) => {
-      setSearched(true);
-      setInSearch(false);
+        if (!resp.data || resp.data.drinks.length === 0) return;
 
-      if (!resp.data || resp.data.drinks.length === 0) return;
-
-      setCocktails(resp.data.drinks.slice(0, 16));
-    });
+        setCocktails(resp.data.drinks.slice(0, 16));
+      });
   }
 
-  const handleFilter = (from: "category" | "ingredient" | "glass", e: any) => {
+  const handleFilter = (from: any, e: any) => {
+    if (!e.target) return;
+
     setCurrentIngredient("");
     setCurrentCategory("");
     setCurrentGlass("");
 
     switch (from) {
-      case "ingredient":
+      case "i":
         setCurrentIngredient(e.target.value);
 
+        navigate(`/search/i=${e.target.value}`, { replace: true });
+
         break;
 
-      case "category":
+      case "c":
         setCurrentCategory(e.target.value);
 
+        navigate(`/search/c=${e.target.value}`, { replace: true });
+
         break;
 
-      case "glass":
+      case "g":
         setCurrentGlass(e.target.value);
+
+        navigate(`/search/g=${e.target.value}`, { replace: true });
 
         break;
     }
+
+    getCocktailByFilter();
   };
 
   useEffect(() => {
-    setCurrentIngredient("Vodka");
-    setCurrentCategory("");
-    setCurrentGlass("");
+    if (term) {
+      handleFilter(term[0], { target: { value: String(term).slice(2) } });
+    }
 
-    getCocktailByFilter();
     getAllData();
-  }, [0]);
+  }, [currentIngredient, currentCategory, currentGlass]);
 
   return (
     <section id="cocktails" className="section cocktails">
@@ -124,7 +137,7 @@ export const Cocktails = () => {
               <select
                 className="input select"
                 value={currentIngredient}
-                onChange={(e) => handleFilter("ingredient", e)}
+                onChange={(e) => handleFilter("i", e)}
               >
                 <option key={`00`} value="">
                   ...
@@ -148,7 +161,7 @@ export const Cocktails = () => {
               <select
                 className="input select"
                 value={currentCategory}
-                onChange={(e) => handleFilter("category", e)}
+                onChange={(e) => handleFilter("c", e)}
               >
                 <option key={`00`} value="">
                   ...
@@ -172,7 +185,7 @@ export const Cocktails = () => {
               <select
                 className="input select"
                 value={currentGlass}
-                onChange={(e) => handleFilter("glass", e)}
+                onChange={(e) => handleFilter("g", e)}
               >
                 <option key={`00`} value="">
                   ...
@@ -187,12 +200,6 @@ export const Cocktails = () => {
               </select>
             </span>
           )}
-        </span>
-
-        <span className="filter button">
-          <button onClick={() => getCocktailByFilter()}>
-            buscar <FaSearch />
-          </button>
         </span>
       </span>
 

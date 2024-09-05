@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import axios from "axios";
 
@@ -9,6 +9,8 @@ import { Loading } from "../globals/Loading";
 import { getIngredientsAndMeasures } from "../../utils/functions";
 
 export const CocktailDetail = () => {
+  const navigate = useNavigate();
+
   const { id } = useParams();
 
   const [cocktail, setCocktail] = useState<any>();
@@ -17,28 +19,32 @@ export const CocktailDetail = () => {
   function getCocktail() {
     setInSearch(true);
 
-    return axios.get(`${endpoints.getOneCocktail}${id}`).then((resp) => {
-      setTimeout(() => {
-        setInSearch(false);
+    return axios
+      .get(
+        id ? `${endpoints.getOneCocktail}${id}` : endpoints.getRandomCocktail
+      )
+      .then((resp) => {
+        setTimeout(() => {
+          setInSearch(false);
 
-        let cocktail = resp.data.drinks[0];
+          let cocktail = resp.data.drinks[0];
 
-        cocktail["ingredients"] = getIngredientsAndMeasures(
-          cocktail
-        ).ingredients.map((i: string) => {
-          return {
-            ingredientName: i,
-            ingredientImage: `https://www.thecocktaildb.com/images/ingredients/${i}-Small.png`,
-          };
-        });
+          cocktail["ingredients"] = getIngredientsAndMeasures(
+            cocktail
+          ).ingredients.map((i: string) => {
+            return {
+              ingredientName: i,
+              ingredientImage: `https://www.thecocktaildb.com/images/ingredients/${i}-Small.png`,
+            };
+          });
 
-        cocktail["measures"] = getIngredientsAndMeasures(cocktail).measures;
+          cocktail["measures"] = getIngredientsAndMeasures(cocktail).measures;
 
-        console.log(`<>>> cocktail <>>>`, cocktail);
+          console.log(`<>>> cocktail <>>>`, cocktail);
 
-        setCocktail(cocktail);
-      }, 500);
-    });
+          setCocktail(cocktail);
+        }, 500);
+      });
   }
 
   useEffect(() => {
@@ -67,9 +73,15 @@ export const CocktailDetail = () => {
                   <h3 className="cocktail__title">{cocktail.strDrink}</h3>
 
                   <span className="badges">
-                    <span className="badges__item">{cocktail.strCategory}</span>
-                    <span className="badges__item">
-                      {cocktail.strAlcoholic}
+                    <span
+                      className="badges__item"
+                      onClick={() =>
+                        navigate(`/search/c=${cocktail.strCategory}`, {
+                          replace: true,
+                        })
+                      }
+                    >
+                      {cocktail.strCategory}
                     </span>
                   </span>
 
@@ -93,6 +105,11 @@ export const CocktailDetail = () => {
                             <li
                               key={`ingredient_${index}`}
                               className="ingredient"
+                              onClick={() =>
+                                navigate(`/search/i=${i.ingredientName}`, {
+                                  replace: true,
+                                })
+                              }
                             >
                               {i.ingredientName}
 

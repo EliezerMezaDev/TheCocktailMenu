@@ -1,41 +1,32 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import "./styles/app.scss";
 
 import { Header } from "./components/globals/Header";
 
-import { Hero } from "./components/sections/Hero";
-import { Random } from "./components/sections/Random";
-import { Cocktails } from "./components/sections/Cocktails";
+import { Home } from "./components/sections/Home";
+import { CocktailList } from "./components/sections/CocktailList";
+
 import { CocktailDetail } from "./components/sections/CocktailDetail";
 
 import { Footer } from "./components/globals/Footer";
-import { useEffect } from "react";
 
 function App() {
-  let navigate = useNavigate();
-
-  useEffect(() => {
-    navigate("/", { replace: true });
-  }, []);
-
   return (
     <div id="container-all" className="container-all">
       <Header />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <main id="main" className="main">
-              <Hero />
-              <Random />
-              <Cocktails />
-            </main>
-          }
-        />
+      <main id="main" className="main">
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-        <Route path="/cocktail/:id" element={<CocktailDetail />} />
-      </Routes>
+          <Route path="/search" element={<CocktailList />} />
+          <Route path="/search/:term" element={<CocktailList />} />
+          
+          <Route path="/cocktail" element={<CocktailDetail />} />
+          <Route path="/cocktail/:id" element={<CocktailDetail />} />
+        </Routes>
+      </main>
+
       <Footer />
     </div>
   );

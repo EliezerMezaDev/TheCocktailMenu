@@ -1,9 +1,11 @@
-import { OptImg } from "../globals/OptImg";
+import { useNavigate } from "react-router-dom";
 
 //? icons
 import { LiaCocktailSolid } from "react-icons/lia";
 
-export const Hero = () => {
+export const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <section id="home" className="hero">
       <div className="hero__wrapper">
@@ -27,15 +29,19 @@ export const Hero = () => {
           </span>
 
           <span className="actions">
-            <a href="#random">
-              <button className="actions__btn button">Explorar</button>
-            </a>
+            <button
+              className="actions__btn button"
+              onClick={() => navigate("/search", { replace: true })}
+            >
+              Explorar
+            </button>
 
-            <a href="#cocktails">
-              <button className="actions__btn button --main">
-                Buscar un coctel <LiaCocktailSolid className="icon" />
-              </button>
-            </a>
+            <button
+              className="actions__btn button --main"
+              onClick={() => navigate("/cocktail", { replace: true })}
+            >
+              Buscar un coctel <LiaCocktailSolid className="icon" />
+            </button>
           </span>
         </article>
       </div>
