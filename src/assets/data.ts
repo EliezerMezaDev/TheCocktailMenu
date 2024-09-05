@@ -13,16 +13,19 @@ export const endpoints = {
     "https://www.thecocktaildb.com/api/json/v1/1/filter.php?",
 
   getRandomCocktail: "https://www.thecocktaildb.com/api/json/v1/1/random.php",
+
+  getOneCocktail:
+    "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=",
 };
 
 export const NAV_ITEMS: Link[] = [
   {
-    url: "#home",
+    url: "/#home",
     title: "home",
     label: "Inicio",
   },
   {
-    url: "#cocktails",
+    url: "/#cocktails",
     title: "cocktails",
     label: "Cocteles",
   },

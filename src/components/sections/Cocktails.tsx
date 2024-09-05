@@ -10,6 +10,7 @@ import { FaSearch } from "react-icons/fa";
 
 //? others
 import { endpoints } from "../../assets/data";
+import { NavLink } from "react-router-dom";
 
 export const Cocktails = () => {
   const [inSearch, setInSearch] = useState<boolean>(false);
@@ -19,9 +20,9 @@ export const Cocktails = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [glasses, setGlasses] = useState<string[]>([]);
 
-  const [currentIngredient, setCurrentIngredient] = useState<string>('Vodka');
-  const [currentCategory, setCurrentCategory] = useState<string>('');
-  const [currentGlass, setCurrentGlass] = useState<string>('');
+  const [currentIngredient, setCurrentIngredient] = useState<string>("Vodka");
+  const [currentCategory, setCurrentCategory] = useState<string>("");
+  const [currentGlass, setCurrentGlass] = useState<string>("");
 
   const [cocktails, setCocktails] = useState<any[]>([]);
 
@@ -56,8 +57,6 @@ export const Cocktails = () => {
   }
 
   function getCocktailByFilter() {
-    console.log(`<>>> asdasd <>>>`, );
-
     setCocktails([]);
     setInSearch(true);
 
@@ -66,8 +65,6 @@ export const Cocktails = () => {
     if (currentIngredient !== "") url = `${url}i=${currentIngredient}`;
     if (currentCategory !== "") url = `${url}c=${currentCategory}`;
     if (currentGlass !== "") url = `${url}g=${currentGlass}`;
-
-    console.log(`<>>> url <>>>`, url);
 
     return axios.get(url).then((resp: { data: { drinks: any[] } }) => {
       setSearched(true);
@@ -217,17 +214,19 @@ export const Cocktails = () => {
                   ) => {
                     return (
                       <article key={`cocktail_${index}`} className="cocktail">
-                        <span className="cocktail__image">
-                          <img
-                            title={`cocktail ${c.strDrink}`}
-                            src={c.strDrinkThumb}
-                            alt={`${c.strDrink}`}
-                          />
-                          <p>{""}</p>
-                        </span>
-                        <span className="cocktail__data">
-                          <h3 className="cocktail__title">{c.strDrink}</h3>
-                        </span>
+                        <NavLink to={`/cocktail/${c.idDrink}`}>
+                          <span className="cocktail__image">
+                            <img
+                              title={`cocktail ${c.strDrink}`}
+                              src={`${c.strDrinkThumb}/preview`}
+                              alt={`${c.strDrink}`}
+                            />
+                            <p>{""}</p>
+                          </span>
+                          <span className="cocktail__data">
+                            <h3 className="cocktail__title">{c.strDrink}</h3>
+                          </span>
+                        </NavLink>
                       </article>
                     );
                   }
