@@ -1,8 +1,3 @@
-//? interfaces
-import { Link } from "../../interfaces";
-
-//? data
-import { NAV_ITEMS } from "../../assets/data";
 import { HashLink } from "react-router-hash-link";
 
 export const Header = () => {
@@ -11,16 +6,26 @@ export const Header = () => {
       <div className="header__wrapper container">
         <nav className="navbar">
           <ul className="navbar__wrapper">
-            {NAV_ITEMS &&
-              NAV_ITEMS.map((item: Link, index: number) => {
-                return (
-                  <li key={index} title={item.title}>
-                    <HashLink to={`${item.url}`}>
-                      <button className="navbar__item">{item.label}</button>
-                    </HashLink>
-                  </li>
-                );
-              })}
+            <li>
+              <HashLink to={`/#home`} title={"nav_home"}>
+                <button className="navbar__item">Inicio</button>
+              </HashLink>
+            </li>
+
+            <li title={"nav_cocktails"}>
+              <HashLink to={`/#cocktails`}>
+                <button className="navbar__item">Cocteles</button>
+              </HashLink>
+            </li>
+
+            <li title={"nav_github"}>
+              <a
+                href={`https://github.com/EliezerMezaDev/TheCocktailMenu`}
+                title="about"
+              >
+                <button className="navbar__item">Acerca de</button>
+              </a>
+            </li>
           </ul>
         </nav>
       </div>

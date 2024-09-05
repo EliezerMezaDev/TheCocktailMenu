@@ -20,12 +20,12 @@ export const endpoints = {
 
 export const NAV_ITEMS: Link[] = [
   {
-    url: "/#home",
+    url: "./#home",
     title: "home",
     label: "Inicio",
   },
   {
-    url: "/#cocktails",
+    url: "./#cocktails",
     title: "cocktails",
     label: "Cocteles",
   },
