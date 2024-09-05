@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import "./styles/app.scss";
 
@@ -10,8 +10,15 @@ import { Cocktails } from "./components/sections/Cocktails";
 import { CocktailDetail } from "./components/sections/CocktailDetail";
 
 import { Footer } from "./components/globals/Footer";
+import { useEffect } from "react";
 
 function App() {
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/", { replace: true });
+  }, []);
+
   return (
     <div id="container-all" className="container-all">
       <Header />
