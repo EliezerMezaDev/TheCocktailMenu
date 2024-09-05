@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Navigate, NavLink, useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 //? components
@@ -7,7 +7,6 @@ import { Loading } from "../globals/Loading";
 import { NotFound } from "../globals/NotFound";
 
 //? icons
-import { FaSearch } from "react-icons/fa";
 
 //? others
 import { endpoints } from "../../assets/data";

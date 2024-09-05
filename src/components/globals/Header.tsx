@@ -7,13 +7,13 @@ export const Header = () => {
         <nav className="navbar">
           <ul className="navbar__wrapper">
             <li>
-              <NavLink to={`/`} title={"nav_home"}>
+              <NavLink to={`./home`} title={"nav_home"}>
                 <button className="navbar__item">Inicio</button>
               </NavLink>
             </li>
 
             <li title={"nav_cocktails"}>
-              <NavLink to={`/search`}>
+              <NavLink to={`./search`}>
                 <button className="navbar__item">Cocteles</button>
               </NavLink>
             </li>
