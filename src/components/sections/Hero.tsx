@@ -8,12 +8,12 @@ export const Hero = () => {
     <section id="home" className="hero">
       <div className="hero__wrapper">
         <article className="hero__data">
-          <p className="hero__data__title neon-title">
+          <h1 className="hero__data__title neon-title">
             <span className="neon flicker">¿</span>
             <span className="neon blinker blinker_1">Tienes </span>
             <span className="neon blinker blinker_2">sed</span>
             <span className="neon flicker">?</span>
-          </p>
+          </h1>
 
           <span className="hero__data__desc">
             <p>

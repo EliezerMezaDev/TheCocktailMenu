@@ -8,8 +8,10 @@ import { Loading } from "../globals/Loading";
 
 //? others
 import { endpoints } from "../../assets/data";
+import { NavLink } from "react-router-dom";
 
 type Drink = {
+  idDrink: string;
   strDrink: string;
   strDrinkThumb: string;
   strImageAttribution: string;
@@ -57,33 +59,38 @@ export const Random = () => {
           {randomCocktail && (
             <>
               <div className="cocktail card">
-                <span className="cocktail__image">
-                  <img
-                    title={`cocktail ${randomCocktail!.strDrink}`}
-                    src={randomCocktail!.strDrinkThumb}
-                    alt={`${randomCocktail!.strDrink}`}
-                  />
-                  <p>
-                    {randomCocktail!.strImageAttribution || "Autor desconocido"}
-                  </p>
-                </span>
-
-                <span className="cocktail__data">
-                  <h3 className="cocktail__title">{randomCocktail.strDrink}</h3>
-                  <span className="cocktail__ingredients">
-                    <button className="ingredient">
-                      {randomCocktail.strIngredient1}
-                    </button>
-                    <button className="ingredient">
-                      {randomCocktail.strIngredient2}
-                    </button>
+                <NavLink to={`/cocktail/${randomCocktail.idDrink}`}>
+                  <span className="cocktail__image">
+                    <img
+                      title={`cocktail ${randomCocktail!.strDrink}`}
+                      src={`${randomCocktail!.strDrinkThumb}/preview`}
+                      alt={`${randomCocktail!.strDrink}`}
+                    />
+                    <p>
+                      {randomCocktail!.strImageAttribution ||
+                        "Autor desconocido"}
+                    </p>
                   </span>
-                  <p className="cocktail__description">
-                    {randomCocktail.strInstructionsES
-                      ? randomCocktail.strInstructionsES
-                      : randomCocktail.strInstructions}
-                  </p>
-                </span>
+
+                  <span className="cocktail__data">
+                    <h3 className="cocktail__title">
+                      {randomCocktail.strDrink}
+                    </h3>
+                    <span className="cocktail__ingredients">
+                      <button className="ingredient">
+                        {randomCocktail.strIngredient1}
+                      </button>
+                      <button className="ingredient">
+                        {randomCocktail.strIngredient2}
+                      </button>
+                    </span>
+                    <p className="cocktail__description">
+                      {randomCocktail.strInstructionsES
+                        ? randomCocktail.strInstructionsES
+                        : randomCocktail.strInstructions}
+                    </p>
+                  </span>
+                </NavLink>
               </div>
             </>
           )}
